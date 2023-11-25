@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APIs</title>
+    <link rel="stylesheet" href="styles.css">
+   
+</head>
+<body >
+    
+    <div align="center" class="container">
+        <div class="head-div">
+            <h1 id="githubUsers">GITHUB USERS</h1>
+            <h1 id="gitHubUserH1">Click here to generate major github users</h1>
+            <button id="gitHubUserBtn" onclick="getUsers()">generate</button>
+        <hr>
+        <div id="userBox">
+
+        </div>
+        </div>
+    </div>
+
+   
+    
+   
+
+    <script>
+        let githubUser = document.getElementById('githubUsers')
+       var endPoint = 'http://api.github.com/users';
+        // GET
+        // POST
+        // PUT
+        // DELETE
+
+      const getUsers = () => {
+
+        let result = '';
+        fetch(endPoint).then((response) => {
+            response.json().then((data)=>{
+                console.log(data);
+                data.map((person)=> {
+                    githubUser.style.display = "initial";
+                    gitHubUserBtn.style.display = "none";
+                    gitHubUserH1.style.display = "none";
+                 result +=  `<div><img src="${person.avatar_url}"> <div class="profiles"><small >${person.login}</small>  <button  onclick="window.open('${person.html_url}')"><span>check profile</span> </button></div></div>`
+                })
+                document.getElementById('userBox').innerHTML = result
+            }) 
+        })
+      }
+    </script>
+</body>
+</html>
